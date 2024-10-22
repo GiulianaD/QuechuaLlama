@@ -17,7 +17,12 @@ def toLowerCase(input):
     return input.lower()
 
 def removeSpecialCharacters(input):
-    pattern = r"^\s+|[#\-&$\*\+\[\]\<\>\\=_\*]+"
+    pattern = r"^\s+|[#\-–&$\*\+\[\]\<\>\\=_\*•—]+"
+    return re.sub(pattern, "", input)
+
+def removeEnumeration(input):
+    pattern =  r"^\d+|\(?[a-zA-Z]\)"
+
     return re.sub(pattern, "", input)
 
 def removeExtraSpaces(input):
@@ -29,8 +34,10 @@ def removeBiblicalReferences(input):
     return re.sub(pattern, "", input)
 
 def normalize(input):
+    input = str(input)
+    input = removeEnumeration(input)
+    input = removeBiblicalReferences(input)
     input = toLowerCase(input)
     input = removeSpecialCharacters(input)
     input = removeExtraSpaces(input)
-    input = removeBiblicalReferences(input)
     return input
