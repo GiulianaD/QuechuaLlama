@@ -1,6 +1,7 @@
 import pandas as pd
 import re
 import os
+from num2words import num2words
 
 # Load the data
 
@@ -34,3 +35,6 @@ def normalize(input):
     input = removeExtraSpaces(input)
     input = removeBiblicalReferences(input)
     return input
+
+def replace_spanish_numbers_to_text(text):
+    return re.sub(r'\b\d+\b', lambda match: num2words(int(match.group()), lang='es'), text)
