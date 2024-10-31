@@ -1,1 +1,55 @@
-<p>home works!</p>
+<div class="title">
+    <img src="assets/icon.jpg" alt="Icon">
+</div>
+
+<div class="tab-group">
+    <mat-tab-group>
+        <div class="home">
+            <mat-tab >
+                <ng-template mat-tab-label>
+                  <mat-icon fontIcon="home"></mat-icon>
+                  Home
+                </ng-template>
+                <div class="home-content">
+                    <div class="profile-picture">
+                        <img src="assets/profile.jpg" alt="Foto de perfil">
+                    </div>
+                    <div class="input-area">
+                      <!-- <form (ngSubmit)="postTweet()" #tweetForm="ngForm">
+                          <textarea [formControl]="contentInput" placeholder="What's happening?" rows="4" cols="50"></textarea>
+                          <div>
+                              <p class="error-message" *ngIf="tweetForm.errors?.['required']">Content is required.</p>
+                              <p class="error-message" *ngIf="tweetForm.errors?.['validate_input']">Please enter valid content (minimum 2 words, should contain letters).</p>
+                          </div>
+                          <button type="submit" [disabled]="tweetForm.invalid">Tweet</button>
+                        </form> -->
+                  </div>
+                </div>
+                    <!-- <app-tweet-list [tweetsList]="tweetsList"></app-tweet-list> -->
+            </mat-tab>
+        </div>
+      
+        <div class="filter">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <!-- <mat-icon fontIcon="menu"></mat-icon> -->
+            Filter
+          </ng-template>
+          <div class="filter-content">
+            <div class="filter-container">
+              <label>Filter by sentiment:</label>
+              <div class="select-container">
+                <!-- <select [(ngModel)]="selectedSentiment" (ngModelChange)="filterTweets()" class="mat-select">
+                  <option value="1">Positive</option>
+                  <option value="2">Neutral</option>
+                  <option value="3">Negative</option>
+                </select> -->
+              </div>
+            </div>
+            <!-- <app-tweet-list [tweetsList]="filteredTweets"></app-tweet-list> -->
+          </div>
+          
+        </mat-tab>
+        </div>
+      </mat-tab-group>
+</div>
