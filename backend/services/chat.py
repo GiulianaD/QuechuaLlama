@@ -47,3 +47,8 @@ def redirectUserQuery(query):
     except ValueError:
         print("The LLM didn't return the appropriate response.")
         
+def queryKnowledgeGraph(query):
+    pass
+
+def translateSpanish2Quechua(query):
+    pass
