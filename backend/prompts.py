@@ -2,7 +2,8 @@ redirection_prompt = """
     I will give you a USER QUERY. Your task is to analyze the query and classify it based on the following criteria, returning ONLY the corresponding number:
 
     1. The query is a request for translation from Spanish to Quechua.
-    2. The query is related to Guarani, Quechua, or Aymara deities. This includes questions related to:
+    2. The query is related to Guaraní, Quechua, or Aymara deities. This includes questions related to:
+        - Finding out what deities has each culture.
         - Querying the names of all defined deities.
         - Retrieving symbolic meanings (simbolismo) associated with each deity.
         - Finding out which festivities (festividad) are related to specific deities.
@@ -24,10 +25,7 @@ redirection_prompt = """
 
     Now, please classify the following USER QUERY: "
 """
-
-sparql_prompt = """
-    I have defined an ontology in RDF as shown below:
-
+rdf_schema = """
     @prefix ns1: <http://example.org/mythology/> .
     @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
     @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -97,11 +95,84 @@ sparql_prompt = """
         rdfs:domain ns1:deidad ;
         rdfs:range ns1:cultura .
 
-    Task: I will provide you with a query in natural language. Your goal is to translate it to a SPARQL query
+"""
+sparql_prompt = f"""
+    I have defined an ontology in RDF as shown below:
+
+    ** RDF SCHEMA **
+    {rdf_schema}
+
+    ** TASK **
+     
+    I will provide you with a query in natural language. Your goal is to translate it to a SPARQL query
      following the previous ontology specifications (properties' names and classes' names).
 
-    Output Format:
-    Return only the SPARQL query (don't include any other text)
+    ** EXAMPLE 1**
 
-    Here is the USER QUERY:
+    USER QUERY: 'Qué festividad tiene el dios inti?'
+    EXPECTED OUTPUT: 
+        "
+        PREFIX ns1: <http://example.org/mythology/>
+        SELECT ?festividadNombre ?deidadNombre
+        WHERE {{
+            ?deidad ns1:has_festividad ?festividad;
+                    ns1:deidad_nombre ?deidadNombre.
+            ?festividad a ns1:festividad;
+                ns1:festividad_nombre ?festividadNombre.
+            FILTER(?deidadNombre = "Inti")
+        }}
+        " 
+    ** EXAMPLE 2**
+
+    USER QUERY: 'Qué dioses de la cultura guaraní y de la cultura quechua existen?'
+    EXPECTED OUTPUT:
+    "
+        PREFIX ns1: <http://example.org/mythology/>
+        SELECT ?deidadNombre
+        WHERE {{
+            ?cultura a ns1:cultura;
+                ns1:cultura_nombre ?culturaNombre.
+            ?deidad a ns1:deidad;
+                    ns1:has_cultura ?cultura;
+                    ns1:deidad_nombre ?deidadNombre.
+            FILTER (?culturaNombre = "Aymara" || ?culturaNombre = "Quechua")
+        }}
+    "
+
+    **EXAMPLE 3**
+    USER QUERY: Qué simboliza el dios Mamani de la cultura aymara?
+    EXPECTED OUTPUT:
+    "
+    PREFIX ns1: <http://example.org/mythology/>
+    SELECT ?simbolismo
+    WHERE {{
+        ?cultura a ns1:cultura;
+            ns1:cultura_nombre ?culturaNombre.
+        ?deidad a ns1:deidad;
+                ns1:has_cultura ?cultura;
+                ns1:deidad_nombre ?deidadNombre;
+                ns1:deidad_simbolismo ?simbolismo;
+        
+        FILTER (?culturaNombre = "Aymara" && ?deidadNombre = "Mamani")
+    }}
+    "
+    ** OUTPUT FORMAT REMINDER **
+
+    Return only a valid SPARQL query (don't include any other text, nor special characters, the variables in the format ?variable must be well written) and the results 
+    should only return what is asked in the question.
+
+    ** INPUT **
+"""
+
+verbalize_triplet_prompt = """
+    ** TASK **
+    You will receive a user query and a triplet as the result of a SPARQL query. Your task is to verbalize the information in the triplet to answer the user query in clear, simple language. Ensure that the response is easy to understand, concise, and relevant to the user query.
+
+    ** GUIDELINES **
+
+    Interpret the triplet in relation to the user query.
+    Use plain language, avoiding technical jargon.
+    Ensure your response directly addresses the user's question.
+    
+    ** TRIPLET **
 """

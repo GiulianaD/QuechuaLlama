@@ -2,10 +2,9 @@ from fastapi import HTTPException
 import requests
 import os
 from dotenv import load_dotenv
-from prompts import redirection_prompt, sparql_prompt
+from prompts import redirection_prompt, sparql_prompt, verbalize_triplet_prompt
 from huggingface_hub import InferenceClient
 from SPARQLWrapper import SPARQLWrapper, JSON
-
 
 load_dotenv()
 
@@ -21,7 +20,6 @@ headers = {
     "Authorization": f"Bearer {HUGGING_FACE_API_TOKEN}",
     "Content-Type": "application/json"
 }
-
 
 def redirectUserQuery(query):
     prompt = redirection_prompt + query + "\""
@@ -74,15 +72,32 @@ def getSPARQL(query):
 
 def queryKnowledgeGraph(query):
     sparql_query = getSPARQL(query)
-
     try:
         sparql.setQuery(sparql_query)
         sparql.setReturnFormat(JSON)
         results = sparql.query().convert()
-        print(results)
-        return {"response": results}
+        verbalized_response = verbalizeSPARQL(query, results)
+        return {"response": verbalized_response}
     except:
         return {"error": "MALFORMED SPARQL QUERY"}
+
+def verbalizeSPARQL(query, results):
+    prompt = verbalize_triplet_prompt + str(results) + "\"\n ** ORIGINAL QUERY**\n\"" + query + "\""
+    messages = [
+        { "role": "user", "content": prompt }
+    ]
+
+    stream = client.chat.completions.create(
+        model="meta-llama/Llama-3.2-3B-Instruct", 
+        messages=messages, 
+        max_tokens=500,
+        stream=True
+    )
+
+    results = ""
+    for chunk in stream:
+        results += chunk.choices[0].delta.content
+    return results
 
 def translateSpanish2Quechua(query):
     pass
