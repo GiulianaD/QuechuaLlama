@@ -2,14 +2,17 @@ from fastapi import HTTPException
 import requests
 import os
 from dotenv import load_dotenv
-from prompts import redirection_prompt
+from prompts import redirection_prompt, sparql_prompt
 from huggingface_hub import InferenceClient
+from SPARQLWrapper import SPARQLWrapper, JSON
+
 
 load_dotenv()
 
 HUGGING_FACE_API_TOKEN = os.getenv("HUGGING_FACE_API_TOKEN")
 API_URL = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-3B-Instruct"
 client = InferenceClient(api_key=HUGGING_FACE_API_TOKEN)
+sparql = SPARQLWrapper("http://WindowsGD:7200/repositories/Mythology3")
 
 if not HUGGING_FACE_API_TOKEN:
     raise ValueError("The Hugging Face token is not configured. Check the .env file.")
@@ -18,6 +21,7 @@ headers = {
     "Authorization": f"Bearer {HUGGING_FACE_API_TOKEN}",
     "Content-Type": "application/json"
 }
+
 
 def redirectUserQuery(query):
     prompt = redirection_prompt + query + "\""
@@ -32,23 +36,53 @@ def redirectUserQuery(query):
         max_tokens=500,
         stream=True
     )
-
+   
     response = ""
     for chunk in stream:
         response += chunk.choices[0].delta.content
-
+ 
     try:
         if (int(response) == 1):
             return {"response": "This is a translation task"}
         elif (int(response) == 2):
-            return {"response": "This is a question about deities"}
+            return queryKnowledgeGraph(query)
         else:
             return {"response": "I am sorry. I am not trained to answer that question."}
     except ValueError:
         print("The LLM didn't return the appropriate response.")
-        
+
+def getSPARQL(query):   
+    prompt = sparql_prompt + query + "\""
+
+    messages = [
+        { "role": "user", "content": prompt }
+    ]
+
+    stream = client.chat.completions.create(
+        model="meta-llama/Llama-3.2-3B-Instruct", 
+        messages=messages, 
+        max_tokens=500,
+        stream=True
+    )
+
+    sparql = ""
+    for chunk in stream:
+        sparql += chunk.choices[0].delta.content
+
+    sparql = sparql.replace('\n', ' ')
+    return sparql    
+
 def queryKnowledgeGraph(query):
-    pass
+    sparql_query = getSPARQL(query)
+
+    try:
+        sparql.setQuery(sparql_query)
+        sparql.setReturnFormat(JSON)
+        results = sparql.query().convert()
+        print(results)
+        return {"response": results}
+    except:
+        return {"error": "MALFORMED SPARQL QUERY"}
 
 def translateSpanish2Quechua(query):
     pass

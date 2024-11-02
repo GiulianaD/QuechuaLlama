@@ -3,9 +3,17 @@ redirection_prompt = """
 
     1. The query is a request for translation from Spanish to Quechua.
     2. The query is related to Guarani, Quechua, or Aymara deities. This includes questions related to:
-        - Culture name.
-        - Names of deities or symbolic meaning,
-        - Festivities or rituals connected to these deities.
+        - Querying the names of all defined deities.
+        - Retrieving symbolic meanings (simbolismo) associated with each deity.
+        - Finding out which festivities (festividad) are related to specific deities.
+        - Identifying the culture (cultura) connected to each deity.
+        - Listing all festivities by their name.
+        - Retrieving information on cultures by name.
+        - Discovering which festivities are tied to a particular culture.
+        - Identifying which culture is associated with specific festivities via deities related to both.
+        - Generating a comprehensive list of deities with their connected cultures and festivities.
+
+        if it is not any of these, then it doesn't classify as 2.
     3. The query does not meet either of the above criteria.
     
     Example Input:
@@ -88,28 +96,12 @@ sparql_prompt = """
         rdfs:label "has cultura"^^xsd:string ;
         rdfs:domain ns1:deidad ;
         rdfs:range ns1:cultura .
-    Task: I will provide you with a query in natural language. Your goal is to determine whether this query can be translated into SPARQL using only the properties and classes defined in the ontology above. If it can, translate it to SPARQL.
+
+    Task: I will provide you with a query in natural language. Your goal is to translate it to a SPARQL query
+     following the previous ontology specifications (properties' names and classes' names).
 
     Output Format:
-    Return the result in JSON format with the following keys:
+    Return only the SPARQL query (don't include any other text)
 
-    "canBeTranslated": Indicate if the query can be translated, with 1 for "yes" and 0 for "no."
-    "SPARQL": Provide the translated SPARQL query if possible; otherwise, return an empty string.
-    Output Example: If the translation is possible:
-
-    json
-    Copy code
-    {
-        "canBeTranslated": 1,
-        "SPARQL": "[the generated SPARQL query]"
-    }
-    If the translation is not possible:
-
-    json
-    Copy code
-    {
-        "canBeTranslated": 0,
-        "SPARQL": ""
-    }
     Here is the USER QUERY:
 """
