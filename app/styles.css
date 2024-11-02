@@ -1,10 +1,263 @@
-html, body {
-    height: 100%;
-    background-color: red !important;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #7663fa;
+    --secondary-color: #151922;
+    --background-color: #f4f4f9;
+    --text-color: #ffffff;
+
+    /* Tipografía para la marca */
+    --font-family-brand: 'Dela Gothic One', sans-serif;
+    --font-weight-brand: 350; /* Regular */
+    --font-size-brand: 36px;
+    --line-height-brand: 48px;
+
+    /* Tipografía Cuadruple-Headline */
+    --font-family-cuadruple-headline: 'Poppins', sans-serif;
+    --font-weight-cuadruple-headline: 600; /* SemiBold */
+    --font-size-cuadruple-headline: 56px;
+    --line-height-cuadruple-headline: 66px;
+
+    /* Tipografía Triple-Headline */
+    --font-family-triple-headline: 'Poppins', sans-serif;
+    --font-weight-triple-headline: 600; /* SemiBold */
+    --font-size-triple-headline: 28px;
+    --line-height-triple-headline: 36px;
+
+    /* Tipografía Double-Headline */
+    --font-family-double-headline: 'Poppins', sans-serif;
+    --font-weight-double-headline: 600; /* SemiBold */
+    --font-size-double-headline: 24px;
+    --line-height-double-headline: 32px;
+
+    /* Tipografía Headline */
+    --font-family-headline: 'Poppins', sans-serif;
+    --font-weight-headline: 600; /* SemiBold */
+    --font-size-headline: 20px;
+    --line-height-headline: 28px;
+
+    /* Tipografía Label */
+    --font-family-label: 'Open Sans', sans-serif;
+    --font-weight-label: 700; /* Bold */
+    --font-size-label: 18px;
+    --line-height-label: 26px;
+
+    /* Tipografía Body 1 */
+    --font-family-body-1: 'Open Sans', sans-serif;
+    --font-weight-body-1: 400; /* Regular */
+    --font-size-body-1: 16px;
+    --line-height-body-1: 22px;
+
+    /* Tipografía Bold-Body 1 */
+    --font-family-bold-body-1: 'Open Sans', sans-serif;
+    --font-weight-bold-body-1: 700; /* Bold */
+    --font-size-bold-body-1: 16px;
+    --line-height-bold-body-1: 22px;
+
+    /* Tipografía Body 2 */
+    --font-family-body-2: 'Open Sans', sans-serif;
+    --font-weight-body-2: 400; /* Regular */
+    --font-size-body-2: 14px;
+    --line-height-body-2: 20px;
+
+    /* Tipografía Bold-Body 2 */
+    --font-family-bold-body-2: 'Open Sans', sans-serif;
+    --font-weight-bold-body-2: 700; /* Bold */
+    --font-size-bold-body-2: 14px;
+    --line-height-bold-body-2: 20px;
+
+    /* Tipografía Body 3 */
+    --font-family-body-3: 'Open Sans', sans-serif;
+    --font-weight-body-3: 400; /* Regular */
+    --font-size-body-3: 12px;
+    --line-height-body-3: 18px;
+
+    --layout-01: 8px;
+    --layout-02: 12px;
+    --layout-03: 16px;
+    --layout-04: 20px;
+    --layout-05: 24px;
+
+    --spacing-01: 4px;
+    --spacing-02: 8px;
+    --spacing-03: 12px;
+    --spacing-04: 16px;
+    --spacing-05: 20px;
+
+    --strokes-xs: 0.25px;
+    --strokes-s: 0.5px;
+    --stroles-m: 0.75px;
+    --strokes-m: 1px;
+
+    --radius-01: 30px;
+    --button-radius: 30px;
+
+    --shadow: 25%;
+    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Times-new-roman', sans-serif !important;
-    font-size: 24px !important;
-    color: green !important;
+html, body {
+    height: 100%;
+    background-color: #f4f4f9;
+}
+
+[data-testid="stSidebarContent"] {
+    background-color: var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+[data-testid="stMarkdownContainer"] {
+    display: flex;
+    color: var(--background-color);
+    text-align: center;
+}
+
+.chat-item {
+    width: 100%; /* Ajusta según tus necesidades */
+    font-size: var(--font-size-headline); /* Tamaño relativo para mejor escalabilidad */
+    text-align: left;
+    font-style: normal;
+    padding: var(--layout-01); /* Espaciado uniforme con unidades rem */
+    margin: var(--spacing-01);
+    border-radius: 10px; /* Añadimos px como unidad */
+    transition: all 0.3s ease; /* Simplificamos la transición */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: #fff; /* Abreviatura para blanco */
+    font-family: var(--font-family-body-1);
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+.chat-item:hover {
+    background-color: #3a3f47; /* Color de fondo en hover más claro */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Sombra más fuerte en hover */
+    cursor: pointer;
+    border: 2px solid #7663fa; /* Borde colorido en hover */
+    padding: 8PX;
+    color: var(--primary-color);
+}
+
+/* Estilos generales para el contenedor stHeading */
+h2.stHeading {
+    text-align: center;
+    margin: 8px;
+    border-bottom: 2px solid var(--primary-color);
+    letter-spacing: 2px;
+    margin-bottom: var(--spacing-03);
+    color: var(--text-color); /* Asegúrate de que el color sea el deseado */
+    font-size: var(--font-size-brand);
+}
+
+/* Sidebar Button */
+/* Estilo para todos los botones en la barra lateral */
+.stSidebar button {
+    border-color: var(--primary-color);
+    color: var(--text-color);
+    padding: var(--layout-01);
+    border: var(--strokes-m);
+    box-shadow: var(--box-shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    width: 100%;
+    margin-top: auto;
+}
+
+/* Upgrade Button */
+
+.st-emotion-cache-1ny7cjd.ef3psqc13 {
+    background-color: var(--primary-color); /* Color de fondo del botón */
+    color: var(--text-color); /* Color del texto */
+    font-family: var(--font-family-cuadruple-headline); /* Tipografía del botón */
+    font-weight: var(--font-weight-cuadruple-headline); /* Peso del texto */
+    font-size: var(--font-size-cuadruple-headline); /* Tamaño de la fuente */
+    border: none; /* Sin borde */
+    border-radius: var(--button-radius); /* Bordes redondeados */
+    box-shadow: var(--box-shadow); /* Sombra */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    width: 100%;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Estilo para el <p> dentro del botón Upgrade */
+.st-emotion-cache-1ny7cjd.ef3psqc13 p {
+    margin: 0; /* Elimina el margen por defecto */
+    color: var(--text-color); /* Asegúrate de que el color del texto coincida */
+    font-family: var(--font-family-headline); /* Tipografía consistente */
+    font-size: var(--font-size-headline); /* Tamaño de fuente consistente */
+    font-weight: var(font --font-weight-brand);
+    line-height: 2; /* Ajusta la altura de línea según sea necesario */
+}
+
+/* Chat Input */
+/* Chat Input */
+
+.st-af.st-b6.st-b7.st-ar.st-as.st-b8.st-b9.st-ba.st-bb.st-bc.st-bd.st-be.st-b1 {
+    border: none;
+}
+
+.stChatInput {
+    resize: vertical;
+    border: 3px solid var(--primary-color); /* Estilo por defecto */
+    border-radius: var(--button-radius);
+    padding: 10px;
+    width: 100%;
+    font-size: 14px;
+    color: #333;
+    transition: border-color 0.2s;
+    background-color: transparent; /* Cambié 'none' por 'transparent' */
+}
+
+.stChatInput textarea {
+    border: none !important; /* Asegúrate de que el textarea no tenga borde */
+    outline: none !important; /* Quita cualquier borde de enfoque */
+    width: 100%; /* Asegúrate de que el textarea use el ancho completo */
+    height: auto; /* Ajusta la altura automáticamente */
+}
+
+.stChatInput textarea:focus {
+    border: none !important; /* Sin borde en el enfoque */
+    outline: none !important; /* Sin contorno en el enfoque */
+}
+
+.stChatInput textarea[aria-invalid="true"] {
+    border-color: transparent !important; /* Color transparente si está inválido */
+}
+
+.st-emotion-cache-s1k4sy.e1d2x3se3 {
+    border: none;
+}
+
+.stError {
+    color: #ff0000; /* Color rojo para el texto del error */
+    background-color: #ffe6e6; /* Fondo claro para resaltar el mensaje de error */
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px; /* Espacio por encima del mensaje de error */
+}
+
+/* CHAT */
+.chat-message {
+    background-color: #e0e0e0; /* Fondo del recuadro */
+    color: #333; /* Color del texto */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para el recuadro */
+    max-width: 80%; /* Ancho máximo del recuadro */
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Imagen circular */
+    object-fit: cover;
+    margin-right: 10px; /* Espacio entre la imagen y el texto */
 }
