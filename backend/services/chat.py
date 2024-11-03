@@ -10,6 +10,7 @@ load_dotenv()
 
 HUGGING_FACE_API_TOKEN = os.getenv("HUGGING_FACE_API_TOKEN")
 API_URL = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-3B-Instruct"
+API_URL_QU = "https://api-inference.huggingface.co/models/giulianad/LlamaQuechuaFT_1ep_1e-4LR"
 
 client = InferenceClient(api_key=HUGGING_FACE_API_TOKEN)
 sparql = SPARQLWrapper("http://WindowsGD:7200/repositories/Mythology3")
@@ -47,7 +48,7 @@ def get_response_from_llm(prompt):
     payload = {
     "inputs": prompt
     }
-    response = requests.post(API_URL, headers=headers, json=payload)
+    response = requests.post(API_URL_QU, headers=headers, json=payload)
 
     if response.status_code != 200:
         raise HTTPException(status_code=response.status_code, detail="Error al conectarse al modelo de Hugging Face")
@@ -65,7 +66,7 @@ def redirect_user_query(query: str) -> dict:
     try:
         response_code = int(response)
         if response_code == 1:
-            return {"response": "This is a translation task."}
+            return translateSpanish2Quechua(query)
         elif response_code == 2:
             return query_knowledge_graph(query)
         else:
@@ -99,4 +100,6 @@ def verbalize_sparql_results(query: str, results) -> str:
     return create_chat_completion(prompt)
 
 def translateSpanish2Quechua(query):
-    pass
+    prompt = query
+    translation = get_response_from_llm(prompt)
+    return {"translation": translation}
