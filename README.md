@@ -2,4 +2,5 @@
 
 ## Backed
 
-Run the application with the following commanduvicorn main:app --reload                                                                                                                                                                                                   
+Run the application with the following command: 
+uvicorn main:app     --reload                                                                                                                                                                                                   

@@ -241,12 +241,14 @@ h2.stHeading {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: inline-block;
     margin: var(--layout-03);
+    min-width: 600px;
 }
 
 .chat-message p{
     font-family: var(--font-family-body-1);
     font-size: var(--font-size-double-headline);
     word-wrap: break-word;
+    min-width: 600px;
 }
 .assistant-message {
     background-color: var(--primary-color);
@@ -255,6 +257,7 @@ h2.stHeading {
     text-align: right;
     margin-left: auto;
     border-radius: var(--radius-01) var(--radius-01) 0px var(--radius-01);
+    min-width: 600px;
 }
 
 .user-message {
@@ -264,6 +267,7 @@ h2.stHeading {
     text-align: left;
     margin-right: auto;
     border-radius: var(--radius-01) var(--radius-01) var(--radius-01) 0px;
+    min-width: 700px;
 }
 
 .profile-pic {

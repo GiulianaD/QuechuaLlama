@@ -13,7 +13,7 @@ API_URL = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-3B-I
 API_URL_QU = "https://api-inference.huggingface.co/models/giulianad/LlamaQuechuaFT_1ep_1e-4LR"
 
 client = InferenceClient(api_key=HUGGING_FACE_API_TOKEN)
-sparql = SPARQLWrapper("http://WindowsGD:7200/repositories/Mythology3")
+sparql = SPARQLWrapper("http://SELWA:7200/repositories/Mythology3")
 
 # Check that the token is configured
 if not HUGGING_FACE_API_TOKEN:
@@ -73,7 +73,7 @@ def redirect_user_query(query: str) -> dict:
             return {"response": "I am sorry. I am not trained to answer that question."}
     except ValueError:
         print("The LLM didn't return an appropriate response.")
-        return {"error": "Invalid response from model."}
+        return {"response": "Invalid response from model."}
 
 # Generates a SPARQL query based on the provided input.
 def get_sparql_query(query: str) -> str:
@@ -92,7 +92,7 @@ def query_knowledge_graph(query: str) -> dict:
         return {"response": verbalized_response}
     except Exception as e:
         print(f"Error querying knowledge graph: {e}")
-        return {"error": "MALFORMED SPARQL QUERY"}
+        return {"response": "MALFORMED SPARQL QUERY"}
 
 # Verbalizes the SPARQL results into a human-readable format
 def verbalize_sparql_results(query: str, results) -> str:
@@ -102,4 +102,4 @@ def verbalize_sparql_results(query: str, results) -> str:
 def translateSpanish2Quechua(query):
     prompt = query
     translation = get_response_from_llm(prompt)
-    return {"translation": translation}
+    return {"response": translation}

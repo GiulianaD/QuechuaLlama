@@ -1,5 +1,8 @@
 import streamlit as st
-    
+import requests
+
+SERVER_URL = "http://127.0.0.1:8000/chat"
+
 # Import CSS & HTML Files
 
 def load_file(file_path):
@@ -41,7 +44,7 @@ def chat_message(text, user_icon, align="left"):
     st.markdown(
         f"""
         <div style="display: flex; align-items: center; margin-bottom: 10px; flex-direction: {flex_direction};">
-            <div class="chat-message {message_class}" style="display: inline-block; flex: 1; text-align: {'left' if align == 'left' else 'right'};">
+            <div class="chat-message {message_class}" style="display: inline-block; flex: 1; text-align: left;">
                 <p>{text}</p>
             </div>
             <img src="{user_icon}" alt="profile" class="profile-pic"; {margin_side}">
@@ -49,12 +52,23 @@ def chat_message(text, user_icon, align="left"):
         """,
         unsafe_allow_html=True
     )
+    
 
 def chat_input():
+    # Hacer Validaciones del input
     if prompt := st.chat_input("Say something", key="chat_input"):
         st.session_state.conversation.append({"role": "user", "content": prompt})
-        response = f"Echo: {prompt}"
-        st.session_state.conversation.append({"role": "assistant", "content": response})
+
+        print("PROMPT: ", prompt)
+        payload = {
+        "message": prompt,
+        }
+
+        # Send a POST request to the server
+        response = requests.post(SERVER_URL,json=payload)
+        print("RESPONSE: ", response)
+        print("JSON: ",  response.json())
+        st.session_state.conversation.append({"role": "assistant", "content": response.json().get("response")})
 
 def display_chat():
     for message in st.session_state.conversation:
