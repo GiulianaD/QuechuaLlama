@@ -152,31 +152,30 @@ html, body {
 }
 
 .chat-item {
-    width: 100%; /* Ajusta según tus necesidades */
-    font-size: var(--font-size-headline); /* Tamaño relativo para mejor escalabilidad */
+    width: 100%;
+    font-size: var(--font-size-headline);
     text-align: left;
     font-style: normal;
-    padding: var(--layout-01); /* Espaciado uniforme con unidades rem */
+    padding: var(--layout-01);
     margin: var(--spacing-01);
-    border-radius: 10px; /* Añadimos px como unidad */
-    transition: all 0.3s ease; /* Simplificamos la transición */
+    border-radius: 10px;
+    transition: all 0.3s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    color: #fff; /* Abreviatura para blanco */
+    color: #fff;
     font-family: var(--font-family-body-1);
     overflow: hidden;
     white-space: nowrap;
   }
 
 .chat-item:hover {
-    background-color: #3a3f47; /* Color de fondo en hover más claro */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Sombra más fuerte en hover */
+    background-color: #3a3f47;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     cursor: pointer;
-    border: 2px solid #7663fa; /* Borde colorido en hover */
+    border: 2px solid #7663fa;
     padding: 8PX;
     color: var(--primary-color);
 }
 
-/* Estilos generales para el contenedor stHeading */
 h2.stHeading {
     text-align: center;
     margin: 8px;
@@ -195,30 +194,30 @@ h2.stHeading {
 
 .stChatInput {
     resize: vertical;
-    border: 3px solid var(--primary-color); /* Estilo por defecto */
+    border: 3px solid var(--primary-color);
     border-radius: var(--button-radius);
     padding: 10px;
     width: 100%;
     font-size: 14px;
     color: #333;
     transition: border-color 0.2s;
-    background-color: transparent; /* Cambié 'none' por 'transparent' */
+    background-color: transparent;
 }
 
 .stChatInput textarea {
-    border: none !important; /* Asegúrate de que el textarea no tenga borde */
-    outline: none !important; /* Quita cualquier borde de enfoque */
-    width: 100%; /* Asegúrate de que el textarea use el ancho completo */
-    height: auto; /* Ajusta la altura automáticamente */
+    border: none;
+    outline: none;
+    width: 100%;
+    height: auto;
 }
 
 .stChatInput textarea:focus {
-    border: none !important; /* Sin borde en el enfoque */
-    outline: none !important; /* Sin contorno en el enfoque */
+    border: none;
+    outline: none;
 }
 
 .stChatInput textarea[aria-invalid="true"] {
-    border-color: transparent !important; /* Color transparente si está inválido */
+    border-color: transparent !important;
 }
 
 .st-emotion-cache-s1k4sy.e1d2x3se3 {
@@ -226,11 +225,11 @@ h2.stHeading {
 }
 
 .stError {
-    color: #ff0000; /* Color rojo para el texto del error */
-    background-color: #ffe6e6; /* Fondo claro para resaltar el mensaje de error */
+    color: #ff0000;
+    background-color: #ffe6e6;
     padding: 10px;
     border-radius: 5px;
-    margin-top: 10px; /* Espacio por encima del mensaje de error */
+    margin-top: 10px;
 }
 
 /* CHAT */
@@ -240,7 +239,7 @@ h2.stHeading {
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 100%; /* Ancho máximo del recuadro */
+    max-width: 100%;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
 }
@@ -248,7 +247,7 @@ h2.stHeading {
 .profile-pic {
     width: 40px;
     height: 40px;
-    border-radius: 50%; /* Imagen circular */
+    border-radius: 50%;
     object-fit: cover;
-    margin-right: 10px; /* Espacio entre la imagen y el texto */
+    margin-right: 10px;
 }
