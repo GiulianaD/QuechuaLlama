@@ -8,10 +8,12 @@ def load_file(file_path):
     
 def create_sidebar():
     st.sidebar.markdown(
-        "<h2 class='stHeading'>Chat History</h2>",
+        "<h2 class='stHeading'>Chat History</h2>"
+        ,
         unsafe_allow_html=True
     )
 
+    
     chat_history = [
     "Conversation about project management tips",
     "Discussing AI advancements in healthcare",
@@ -28,6 +30,9 @@ def create_sidebar():
             """,
             unsafe_allow_html=True
         )
+    
+    st.sidebar.button("Upgrade Plan 👉", key="upgrade_button")
+        
 def chat_message(text, user_icon, align="left"):
     st.markdown(
         f"""
@@ -66,7 +71,6 @@ def main():
 
     # Sidebar
     create_sidebar()
-    st.sidebar.button("Upgrade Plan 👉", key="upgrade_button")
 
     if 'conversation' not in st.session_state:
         st.session_state.conversation = []
