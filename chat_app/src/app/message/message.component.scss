@@ -1,0 +1,16 @@
+.sidebar {
+    width: 250px;
+    background: #f0f0f0;
+    height: 100vh;
+    padding: 20px;
+  }
+  
+  .chat-history {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+  
+  .chat-item {
+    margin-bottom: 10px;
+  }
+  
