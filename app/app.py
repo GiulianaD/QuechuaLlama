@@ -48,7 +48,7 @@ def chat_message(text, user_icon, align="left"):
     st.markdown(
         f"""
         <div style="display: flex; align-items: flex-start; margin-bottom: 10px; flex-direction: {flex_direction};">
-            <div class="chat-message {message_class}" style="flex: 1; text-align: left; margin-right: 10px; max-width: 75%;">
+            <div class="chat-message {message_class}" style="flex: 1; text-align: left; max-width: 100%;">
                 <p>{text}</p>
             </div>
             <img src="{user_icon}" alt="profile" class="profile-pic" style="{margin_side}">

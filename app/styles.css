@@ -228,7 +228,7 @@ h2.stHeading {
 .chat-message {
     color: var(--secondary-color);
     padding: var(--spacing-02);
-    margin: var(--layout-03);
+    margin: var(--layout-02);
     max-width: 80%; /* Asegúrate de que el texto no se desborde */
     overflow-wrap: break-word;
 }
@@ -270,7 +270,7 @@ h2.stHeading {
     flex-direction: column;
     align-items: flex-start;
     width: auto;
-    max-width: 100%;
+    max-width: 90%;
 }
 
 .toast {
@@ -284,11 +284,10 @@ h2.stHeading {
     align-items: center;
     max-width: fit-content;
     margin: 10px auto;
-    position: fixed;  /* Fijo en la pantalla */
-    bottom: 12%;    /* Espaciado desde la parte inferior */
-    left: 65%;        /* Centrado horizontalmente */
-    transform: translateX(-35%); /* Compensa el centrado */
-    z-index: 1000;       /* Inicialmente visible */
+    position: fixed;
+    bottom: 12%;
+    left: 58%;
+    transform: translateX(-42%);
 }
 
 
