@@ -228,8 +228,8 @@ h2.stHeading {
 .chat-message {
     color: var(--secondary-color);
     padding: var(--spacing-02);
-    margin: var(--layout-03);
-    max-width: 80%; /* Asegúrate de que el texto no se desborde */
+    margin: var(--layout-02);
+    max-width: 80%;
     overflow-wrap: break-word;
 }
 
@@ -270,5 +270,25 @@ h2.stHeading {
     flex-direction: column;
     align-items: flex-start;
     width: auto;
-    max-width: 100%;
+    max-width: 90%;
 }
+
+.toast {
+    background-color: #FF4B4B;
+    color: var(--text-color-light);
+    padding: var(--spacing-03);
+    border-radius: var(--radius-01);
+    font-size: var(--font-size-headline);
+    font-style: bold;
+    display: flex;
+    align-items: center;
+    max-width: fit-content;
+    margin: 10px auto;
+    position: fixed;
+    bottom: 13%;
+    left: 58%;
+    transform: translateX(-42%);
+    z-index: 1000;
+}
+
+
