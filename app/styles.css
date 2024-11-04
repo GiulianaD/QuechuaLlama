@@ -4,8 +4,6 @@
 
 :root {
     --primary-color: #b4b4b4;
-    /*--primary-color: #7663fa;*/
-    /*--primary-color: #D1495B;*/
     --secondary-color: #171717;
 
     --background-color-dark: #171717;
@@ -15,71 +13,30 @@
     --text-color-dark: #151922;
     --text-color-light: #f4f4f9; 
 
-    /* Tipografía para la marca */
     --font-family-brand: 'Dela Gothic One', sans-serif;
-    --font-weight-brand: 350; /* Regular */
+    --font-weight-brand: 350;
     --font-size-brand: 36px;
     --line-height-brand: 48px;
 
-    /* Tipografía Cuadruple-Headline */
     --font-family-cuadruple-headline: 'Poppins', sans-serif;
-    --font-weight-cuadruple-headline: 600; /* SemiBold */
+    --font-weight-cuadruple-headline: 600;
     --font-size-cuadruple-headline: 56px;
     --line-height-cuadruple-headline: 66px;
 
-    /* Tipografía Triple-Headline */
-    --font-family-triple-headline: 'Poppins', sans-serif;
-    --font-weight-triple-headline: 600; /* SemiBold */
-    --font-size-triple-headline: 28px;
-    --line-height-triple-headline: 36px;
-
-    /* Tipografía Double-Headline */
     --font-family-double-headline: 'Poppins', sans-serif;
-    --font-weight-double-headline: 600; /* SemiBold */
+    --font-weight-double-headline: 600;
     --font-size-double-headline: 24px;
     --line-height-double-headline: 32px;
 
-    /* Tipografía Headline */
     --font-family-headline: 'Poppins', sans-serif;
-    --font-weight-headline: 600; /* SemiBold */
+    --font-weight-headline: 600;
     --font-size-headline: 20px;
     --line-height-headline: 28px;
 
-    /* Tipografía Label */
-    --font-family-label: 'Open Sans', sans-serif;
-    --font-weight-label: 700; /* Bold */
-    --font-size-label: 18px;
-    --line-height-label: 26px;
-
-    /* Tipografía Body 1 */
     --font-family-body-1: 'Open Sans', sans-serif;
-    --font-weight-body-1: 400; /* Regular */
+    --font-weight-body-1: 400;
     --font-size-body-1: 16px;
     --line-height-body-1: 22px;
-
-    /* Tipografía Bold-Body 1 */
-    --font-family-bold-body-1: 'Open Sans', sans-serif;
-    --font-weight-bold-body-1: 700; /* Bold */
-    --font-size-bold-body-1: 16px;
-    --line-height-bold-body-1: 22px;
-
-    /* Tipografía Body 2 */
-    --font-family-body-2: 'Open Sans', sans-serif;
-    --font-weight-body-2: 400; /* Regular */
-    --font-size-body-2: 14px;
-    --line-height-body-2: 20px;
-
-    /* Tipografía Bold-Body 2 */
-    --font-family-bold-body-2: 'Open Sans', sans-serif;
-    --font-weight-bold-body-2: 700; /* Bold */
-    --font-size-bold-body-2: 14px;
-    --line-height-bold-body-2: 20px;
-
-    /* Tipografía Body 3 */
-    --font-family-body-3: 'Open Sans', sans-serif;
-    --font-weight-body-3: 400; /* Regular */
-    --font-size-body-3: 12px;
-    --line-height-body-3: 18px;
 
     --layout-01: 8px;
     --layout-02: 12px;
@@ -93,16 +50,9 @@
     --spacing-04: 16px;
     --spacing-05: 20px;
 
-    --strokes-xs: 0.5px;
-    --strokes-s: 1px;
-    --stroles-m: 1.5px;
-    --strokes-m: 2px;
-
     --radius-01: 10px;
     --radius-02: 30px;
     --radius-03: 100px;
-
-    --button-radius: 30px;
 
     --shadow: 25%;
     --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -115,7 +65,6 @@
 
 [data-testid="stHeader"] {
     background-color: var(--background-color-light);
-    /*background: linear-gradient(to right, #1B263B, var(--primary-color)); /* Gradiente de azul oscuro a terracota suave */
     color: var(--text-color-light);
     padding: 20px;
     display: flex;
@@ -146,7 +95,7 @@
     background-color: var(--background-color-medium);
     color: var(--text-color-light);
     border: none;
-    border-radius: var(--button-radius);
+    border-radius: var(--radius-02);
     box-shadow: var(--box-shadow);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     width: 100%;
@@ -158,7 +107,7 @@
 }
 
 
-[data-testid="stBaseButton-secondary"]:active { /* Cambios aquí */
+[data-testid="stBaseButton-secondary"]:active {
     background-color: var(--text-color-light);
     color: var(--text-color-dark); 
     border: 2px solid transparent;
@@ -231,7 +180,7 @@ h2.stHeading {
 .stChatInput {
     resize: vertical;
     border: 3px solid var(--primary-color);
-    border-radius: var(--button-radius);
+    border-radius: var(--radius-02);
     padding: var(--spacing-03);
     width: 100%;
     transition: border-color 0.2s;
@@ -279,7 +228,7 @@ h2.stHeading {
     color: var(--secondary-color);
     padding: var(--spacing-02);
     display: inline-block;
-    margin: var(--layout-03);
+    margin: var(--layout-02);
     width: fit-content;
     max-width: 100%;
 }
@@ -323,12 +272,4 @@ h2.stHeading {
     align-items: flex-start;
     width: auto;
     max-width: 100%;
-}
-
-.assistant-message,
-.user-message {
-    padding: var(--spacing-02);
-    border-radius: var(--radius-01);
-    max-width: 80%; /* O ajusta según sea necesario */
-    overflow-wrap: break-word; /* Asegúrate de que el texto largo se divida en líneas */
 }
