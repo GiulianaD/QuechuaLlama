@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+import re
 
 SERVER_URL = "http://127.0.0.1:8000/chat"
 
@@ -56,24 +57,67 @@ def chat_message(text, user_icon, align="left"):
         unsafe_allow_html=True
     )
 
+def show_custom_toast(message):
+    st.markdown(
+        f"""
+        <div class="toast">
+            <span style="font-size: 24px; margin-right: 10px;">⚠️</span>
+            <span>{message}</span>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-    
+def validate_user_input(prompt):
+
+    if not prompt.strip():
+        show_custom_toast("Please enter some text to translate.")
+        return False
+    elif any(char.isdigit() for char in prompt):
+        show_custom_toast("Please enter text without numbers.")
+        return False
+    elif not any(char.isalpha() for char in prompt):
+        show_custom_toast("The text must contain letters.")
+        return False
+    elif len(prompt) <= 2:
+        show_custom_toast("The text must contain more than one letter.")
+        return False
+    elif len(prompt) > 300:
+        show_custom_toast("The text cannot exceed 300 characters.")
+        return False
+    elif len(prompt.split()) <= 1:
+        show_custom_toast("The text must contain more than one word.")
+        return 
+    elif len(set(prompt.split())) <= 3 and len(prompt.split()[0]) == 1:
+        show_custom_toast("Please enter more meaningful text.")
+        return False
+    elif not re.search(r'[aeiouáéíóú]', prompt, re.IGNORECASE):
+        show_custom_toast("Please enter more meaningful text.")
+        return False
+    return True
+
+def send_message_to_server(prompt):
+    payload = {"message": prompt}
+    try:
+        response = requests.post(SERVER_URL, json=payload)
+        response.raise_for_status()
+        json_response = response.json()
+        return json_response.get("response", "Sorry, I didn't understand your request.")
+    except requests.exceptions.RequestException:
+        show_custom_toast("Connection error. Please check the server and try again.")
+    except ValueError:
+        show_custom_toast("Error processing the response. The response is not in the expected format.")
+    return None
+
 
 def chat_input():
-
-    if prompt := st.chat_input("Say something", key="chat_input"):
+    prompt = st.chat_input("Say something", key="chat_input")
+    if prompt and validate_user_input(prompt):
         st.session_state.conversation.append({"role": "user", "content": prompt})
+        assistant_response = send_message_to_server(prompt)
+        if assistant_response:
+            st.session_state.conversation.append({"role": "assistant", "content": assistant_response})
 
-        print("PROMPT: ", prompt)
-        payload = {
-        "message": prompt,
-        }
-
-        # Send a POST request to the server
-        response = requests.post(SERVER_URL,json=payload)
-        print("RESPONSE: ", response)
-        print("JSON: ",  response.json())
-        st.session_state.conversation.append({"role": "assistant", "content": response.json().get("response")})
 
 def display_chat():
     for message in st.session_state.conversation:

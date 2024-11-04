@@ -272,3 +272,23 @@ h2.stHeading {
     width: auto;
     max-width: 100%;
 }
+
+.toast {
+    background-color: #FF4B4B;
+    color: var(--text-color-light);
+    padding: var(--spacing-03);
+    border-radius: var(--radius-01);
+    font-size: var(--font-size-headline);
+    font-style: bold;
+    display: flex;
+    align-items: center;
+    max-width: fit-content;
+    margin: 10px auto;
+    position: fixed;  /* Fijo en la pantalla */
+    bottom: 12%;    /* Espaciado desde la parte inferior */
+    left: 65%;        /* Centrado horizontalmente */
+    transform: translateX(-35%); /* Compensa el centrado */
+    z-index: 1000;       /* Inicialmente visible */
+}
+
+
