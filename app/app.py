@@ -16,7 +16,6 @@ def create_sidebar():
         unsafe_allow_html=True
     )
 
-    
     chat_history = [
     "Conversation about project management tips",
     "Discussing AI advancements in healthcare",
@@ -37,7 +36,7 @@ def create_sidebar():
     st.sidebar.button("Upgrade Plan 👉", key="upgrade_button")
         
 def chat_message(text, user_icon, align="left"):
-    flex_direction = "row" if align == "left" else "row-reverse"
+    flex_direction = "row" if align == "right" else "row-reverse"
     message_class = "assistant-message" if align == "left" else "user-message"
     margin_side = "margin-left: 15px;" if align == "left" else "margin-right: 15px;"
 
@@ -76,14 +75,14 @@ def chat_input():
 def display_chat():
     for message in st.session_state.conversation:
         user_icon = user_profile if message["role"] == "user" else assistant_profile
-        chat_message(message["content"], user_icon, align="left" if message["role"] == "user" else "right")
+        chat_message(message["content"], user_icon, align="right" if message["role"] == "user" else "left")
 
 
 assistant_profile = "https://i.pinimg.com/550x/f9/e5/90/f9e590368d01c87a14938ecbb96c97ec.jpg"
 user_profile = "https://hips.hearstapps.com/hmg-prod/images/shrek-64f9ceef56099.jpg?crop=0.565xw:1.00xh;0.218xw,0&resize=1200:*"
 
 def main():
-    st.title("LlamaQ")
+    st.title("Llama Quechua")
 
     css_content = load_file('styles.css')
     html_content = load_file('app.html')
