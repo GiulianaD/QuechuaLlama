@@ -17,11 +17,17 @@ def create_sidebar():
     )
 
     chat_history = [
-    "Conversation about project management tips",
-    "Discussing AI advancements in healthcare",
-    "Ideas for content marketing strategy",
-    "Brainstorming product features"
+        "Asking about the main gods in Inca mythology.",
+        "Discussing Inti, the sun god.",
+        "Consulting about Quechua grammar.",
+        "Translating a poem to Quechua.",
+        "Stories about Pachamama.",
+        "Translating basic sentences.",
+        "Words related to Carnaval culture.",
+        "Importance of sacred animals."
     ]
+
+
     
     for chat in chat_history:
         st.sidebar.markdown(

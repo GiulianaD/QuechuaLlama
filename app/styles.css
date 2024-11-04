@@ -95,11 +95,12 @@
     background-color: var(--background-color-medium);
     color: var(--text-color-light);
     border: none;
+    margin-top: 380px;
     border-radius: var(--radius-02);
     box-shadow: var(--box-shadow);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     width: 100%;
-    margin-top: 600px;
+    
 }
 
 [data-testid="stBaseButton-secondary"]:hover {
