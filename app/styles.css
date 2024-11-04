@@ -228,10 +228,9 @@ h2.stHeading {
 .chat-message {
     color: var(--secondary-color);
     padding: var(--spacing-02);
-    display: inline-block;
-    margin: var(--layout-02);
-    width: fit-content;
-    max-width: 100%;
+    margin: var(--layout-03);
+    max-width: 80%; /* Asegúrate de que el texto no se desborde */
+    overflow-wrap: break-word;
 }
 
 .chat-message p{
@@ -264,7 +263,6 @@ h2.stHeading {
     border-radius: 50%;
     object-fit: cover;
     margin: var(--layout-02);
-    align-self: flex-start;
 }
 
 [data-testid="stVerticalBlock"] {

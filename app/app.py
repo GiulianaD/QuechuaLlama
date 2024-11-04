@@ -18,16 +18,14 @@ def create_sidebar():
 
     chat_history = [
         "Asking about the main gods in Inca mythology.",
-        "Discussing Inti, the sun god.",
         "Consulting about Quechua grammar.",
+        "Discussing Inti, the sun god.",
         "Translating a poem to Quechua.",
         "Stories about Pachamama.",
         "Translating basic sentences.",
         "Words related to Carnaval culture.",
         "Importance of sacred animals."
     ]
-
-
     
     for chat in chat_history:
         st.sidebar.markdown(
@@ -48,19 +46,21 @@ def chat_message(text, user_icon, align="left"):
 
     st.markdown(
         f"""
-        <div style="display: flex; align-items: center; margin-bottom: 10px; flex-direction: {flex_direction};">
-            <div class="chat-message {message_class}" style="display: inline-block; flex: 1; text-align: left;">
+        <div style="display: flex; align-items: flex-start; margin-bottom: 10px; flex-direction: {flex_direction};">
+            <div class="chat-message {message_class}" style="flex: 1; text-align: left; margin-right: 10px; max-width: 75%;">
                 <p>{text}</p>
             </div>
-            <img src="{user_icon}" alt="profile" class="profile-pic"; {margin_side}">
+            <img src="{user_icon}" alt="profile" class="profile-pic" style="{margin_side}">
         </div>
         """,
         unsafe_allow_html=True
     )
+
+
     
 
 def chat_input():
-    # Hacer Validaciones del input
+
     if prompt := st.chat_input("Say something", key="chat_input"):
         st.session_state.conversation.append({"role": "user", "content": prompt})
 
@@ -69,14 +69,11 @@ def chat_input():
         "message": prompt,
         }
 
-        response = f'echo: {prompt}'
-        st.session_state.conversation.append({"role": "assistant", "content": response})
-
         # Send a POST request to the server
-        # response = requests.post(SERVER_URL,json=payload)
-        # print("RESPONSE: ", response)
-        # print("JSON: ",  response.json())
-        # st.session_state.conversation.append({"role": "assistant", "content": response.json().get("response")})
+        response = requests.post(SERVER_URL,json=payload)
+        print("RESPONSE: ", response)
+        print("JSON: ",  response.json())
+        st.session_state.conversation.append({"role": "assistant", "content": response.json().get("response")})
 
 def display_chat():
     for message in st.session_state.conversation:
@@ -95,7 +92,6 @@ def main():
 
     st.markdown(f'<style>{css_content}</style>', unsafe_allow_html=True)
 
-    # Sidebar
     create_sidebar()
 
     if 'conversation' not in st.session_state:
