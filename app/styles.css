@@ -3,80 +3,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 
 :root {
-    --primary-color: #7663fa;
-    --secondary-color: #151922;
+    --primary-color: #b4b4b4;
+    --secondary-color: #171717;
 
-    --background-color-dark: #151922;
-    --background-color-light: #f4f4f9;
+    --background-color-dark: #171717;
+    --background-color-light: #212121;
+    --background-color-medium: #2f2f2f;
 
     --text-color-dark: #151922;
     --text-color-light: #f4f4f9; 
 
-    /* Tipografía para la marca */
     --font-family-brand: 'Dela Gothic One', sans-serif;
-    --font-weight-brand: 350; /* Regular */
+    --font-weight-brand: 350;
     --font-size-brand: 36px;
     --line-height-brand: 48px;
 
-    /* Tipografía Cuadruple-Headline */
     --font-family-cuadruple-headline: 'Poppins', sans-serif;
-    --font-weight-cuadruple-headline: 600; /* SemiBold */
+    --font-weight-cuadruple-headline: 600;
     --font-size-cuadruple-headline: 56px;
     --line-height-cuadruple-headline: 66px;
 
-    /* Tipografía Triple-Headline */
-    --font-family-triple-headline: 'Poppins', sans-serif;
-    --font-weight-triple-headline: 600; /* SemiBold */
-    --font-size-triple-headline: 28px;
-    --line-height-triple-headline: 36px;
-
-    /* Tipografía Double-Headline */
     --font-family-double-headline: 'Poppins', sans-serif;
-    --font-weight-double-headline: 600; /* SemiBold */
+    --font-weight-double-headline: 600;
     --font-size-double-headline: 24px;
     --line-height-double-headline: 32px;
 
-    /* Tipografía Headline */
     --font-family-headline: 'Poppins', sans-serif;
-    --font-weight-headline: 600; /* SemiBold */
+    --font-weight-headline: 600;
     --font-size-headline: 20px;
     --line-height-headline: 28px;
 
-    /* Tipografía Label */
-    --font-family-label: 'Open Sans', sans-serif;
-    --font-weight-label: 700; /* Bold */
-    --font-size-label: 18px;
-    --line-height-label: 26px;
-
-    /* Tipografía Body 1 */
     --font-family-body-1: 'Open Sans', sans-serif;
-    --font-weight-body-1: 400; /* Regular */
+    --font-weight-body-1: 400;
     --font-size-body-1: 16px;
     --line-height-body-1: 22px;
-
-    /* Tipografía Bold-Body 1 */
-    --font-family-bold-body-1: 'Open Sans', sans-serif;
-    --font-weight-bold-body-1: 700; /* Bold */
-    --font-size-bold-body-1: 16px;
-    --line-height-bold-body-1: 22px;
-
-    /* Tipografía Body 2 */
-    --font-family-body-2: 'Open Sans', sans-serif;
-    --font-weight-body-2: 400; /* Regular */
-    --font-size-body-2: 14px;
-    --line-height-body-2: 20px;
-
-    /* Tipografía Bold-Body 2 */
-    --font-family-bold-body-2: 'Open Sans', sans-serif;
-    --font-weight-bold-body-2: 700; /* Bold */
-    --font-size-bold-body-2: 14px;
-    --line-height-bold-body-2: 20px;
-
-    /* Tipografía Body 3 */
-    --font-family-body-3: 'Open Sans', sans-serif;
-    --font-weight-body-3: 400; /* Regular */
-    --font-size-body-3: 12px;
-    --line-height-body-3: 18px;
 
     --layout-01: 8px;
     --layout-02: 12px;
@@ -90,24 +50,26 @@
     --spacing-04: 16px;
     --spacing-05: 20px;
 
-    --strokes-xs: 0.5px;
-    --strokes-s: 1px;
-    --stroles-m: 1.5px;
-    --strokes-m: 2px;
-
     --radius-01: 10px;
     --radius-02: 30px;
     --radius-03: 100px;
-
-    --button-radius: 30px;
 
     --shadow: 25%;
     --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-html, body {
+.stAppViewContainer {
     height: 100%;
-    background-color: #f4f4f9;
+    background-color: #212121;
+}
+
+[data-testid="stHeader"] {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 [data-testid="stSidebar"]{
@@ -130,18 +92,31 @@ html, body {
 /* Upgrade Button */
 
 [data-testid="stBaseButton-secondary"] {
-    background-color: var(--primary-color);
+    background-color: var(--background-color-medium);
     color: var(--text-color-light);
     border: none;
-    border-radius: var(--button-radius);
+    margin-top: 380px;
+    border-radius: var(--radius-02);
     box-shadow: var(--box-shadow);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     width: 100%;
-    margin-top: 600px;
+    
 }
 
 [data-testid="stBaseButton-secondary"]:hover {
-    background-color: #ac80f9;
+    border: 2px solid var(--text-color-light);
+}
+
+
+[data-testid="stBaseButton-secondary"]:active {
+    background-color: var(--text-color-light);
+    color: var(--text-color-dark); 
+    border: 2px solid transparent;
+}
+
+[data-testid="stBaseButton-secondary"]::selection {
+    background-color: var(--text-color-light);
+    border: 2px solid var(--text-color-light);
 }
 
 [data-testid="stButton"] p {
@@ -149,7 +124,7 @@ html, body {
     color: var(--text-color-light);
     font-family: var(--font-family-headline);
     font-size: var(--font-size-headline);
-    font-weight: var(--font --font-weight-brand);
+    font-weight: var(--font-weight-brand);
     line-height: 2;
 }
 
@@ -158,72 +133,86 @@ html, body {
     font-size: var(--font-size-headline);
     text-align: left;
     font-style: normal;
-    padding: var(--layout-01);
-    margin: var(--spacing-01);
-    border-radius: 10px;
+    padding: var(--spacing-03r);
+    margin: var(--layout-02);
+    border-radius: var(--radius-01);
     transition: all 0.3s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    color: #fff;
-    font-family: var(--font-family-body-1);
+    color: var(--text-color-light);
+    font-family: var(--font-family-headline);
     overflow: hidden;
     white-space: nowrap;
   }
 
 .chat-item:hover {
-    background-color: #3a3f47;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    background-color: var(--background-color-medium);
+    box-shadow: 0 6px 15px rgba(51, 49, 49, 0.3);
     cursor: pointer;
-    border: 2px solid #7663fa;
-    padding: 8PX;
+    border: 2px solid var(--primary-color);
+    padding: var(--spacing-02);
     color: var(--primary-color);
 }
 
 h2.stHeading {
     text-align: center;
-    margin: 8px;
+    margin: var(--layout-01);
     border-bottom: 2px solid var(--primary-color);
     letter-spacing: 2px;
-    margin-bottom: var(--spacing-03);
-    color: var(--text-color-light);
+    margin-bottom: var(--layout-05);
     font-size: var(--font-size-brand);
+    font-family: var(--font-family-brand);
+    color: var(--text-color-light);
+}
+
+[id="llama-quechua"] {
+    color: var(--text-color-light);
+    font-size: var(--font-size-cuadruple-headline);
+    font-family: var(--font-family-brand);
+    font-weight: var(--font-weight-brand);
+    margin-bottom: var(--layout-05);
+}
+
+.st-emotion-cache-128upt6.ea3mdgi6 {
+    background-color: var(--background-color-light);
 }
 
 /* Chat Input */
 
-.st-af.st-b6.st-b7.st-ar.st-as.st-b8.st-b9.st-ba.st-bb.st-bc.st-bd.st-be.st-b1 {
-    border: none;
-}
-
 .stChatInput {
     resize: vertical;
     border: 3px solid var(--primary-color);
-    border-radius: var(--button-radius);
-    padding: 10px;
+    border-radius: var(--radius-02);
+    padding: var(--spacing-03);
     width: 100%;
-    font-size: 40px;
-    color: #333;
     transition: border-color 0.2s;
-    background-color: transparent;
+    background-color: var(--background-color-light);
 }
 
-.stChatInput textarea {
+[data-baseweb="textarea"] {
     border: none;
     outline: none;
     width: 100%;
     height: auto;
+    padding-right: var(--spacing-02);
 }
 
-.stChatInput textarea:focus {
-    border: none;
-    outline: none;
+[data-baseweb="textarea"] textarea {
+    font-family: var(--font-family-double-headline);
+    font-size: var(--font-size-double-headline);
+    color: var(--text-color-light);
 }
 
-.stChatInput textarea[aria-invalid="true"] {
-    border-color: transparent !important;
-}
 
-.st-emotion-cache-s1k4sy.e1d2x3se3 {
-    border: none;
+[data-testid="stChatInputSubmitButton"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-02) var(--spacing-03);
+    transition: background-color 0.3s ease;
+}
+[data-testid="stChatInputSubmitButton"]:hover {
+    align-items: center;
+    background-color: var(--primary-color);
 }
 
 .stError {
@@ -235,45 +224,51 @@ h2.stHeading {
 }
 
 /* CHAT */
+
 .chat-message {
     color: var(--secondary-color);
     padding: var(--spacing-02);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: inline-block;
     margin: var(--layout-03);
-    min-width: 600px;
+    max-width: 80%; /* Asegúrate de que el texto no se desborde */
+    overflow-wrap: break-word;
 }
 
 .chat-message p{
     font-family: var(--font-family-body-1);
     font-size: var(--font-size-double-headline);
-    word-wrap: break-word;
-    min-width: 600px;
 }
+
 .assistant-message {
-    background-color: var(--primary-color);
+    background-color:  transparent;
     color: var(--text-color-light);
     align-self: flex-end;
     text-align: right;
     margin-left: auto;
+    border: none;
     border-radius: var(--radius-01) var(--radius-01) 0px var(--radius-01);
-    min-width: 600px;
 }
 
 .user-message {
-    background-color: #e0e0e0;
-    color: var(--secondary-color);
+    background-color: var(--background-color-medium);
+    color: var(--text-color-light);
     align-self: flex-start;
     text-align: left;
     margin-right: auto;
     border-radius: var(--radius-01) var(--radius-01) var(--radius-01) 0px;
-    min-width: 700px;
 }
 
 .profile-pic {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     object-fit: cover;
     margin: var(--layout-02);
+}
+
+[data-testid="stVerticalBlock"] {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: auto;
+    max-width: 100%;
 }
