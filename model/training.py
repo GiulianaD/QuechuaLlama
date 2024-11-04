@@ -4,6 +4,7 @@ from trl import SFTTrainer
 from transformers import TrainingArguments, DataCollatorForSeq2Seq
 from unsloth.chat_templates import get_chat_template,  train_on_responses_only
 import datasets
+from dataPreprocessing import generate_llm_dataset, save_dataset_splits
 
 max_seq_length = 1024
 dtype = None
@@ -11,6 +12,8 @@ dtype = None
 load_in_4bit = True
 
 df = pd.read_csv('/content/spa_quz_normalized_2000.csv')
+llm_dataset = generate_llm_dataset(df)
+train_set, test_set, validation_set  = save_dataset_splits(llm_dataset, train_size=0.8, file_prefix="llm_data")
 
 model, tokenizer = FastLanguageModel.from_pretrained(
     model_name = "unsloth/Llama-3.2-3B-Instruct",
@@ -32,6 +35,12 @@ model = FastLanguageModel.get_peft_model(
     use_rslora = False,
     loftq_config = None,
 )
+
+tokenizer = get_chat_template(
+    tokenizer,
+    chat_template = "llama-3.1",
+)
+
 
 tokenizer = get_chat_template(
     tokenizer,

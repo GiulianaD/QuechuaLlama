@@ -1,7 +1,0 @@
-xformers
-unsloth
-datasets
-pandas
-torch
-trl
-transformers

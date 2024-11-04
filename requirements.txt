@@ -6,4 +6,11 @@ starlette
 SPARQLWrapper
 huggingface-hub
 streamlit
-
+xformers
+unsloth
+datasets
+pandas
+torch
+trl
+transformers
+num2words
