@@ -64,11 +64,14 @@ def chat_input():
         "message": prompt,
         }
 
+        response = f'echo: {prompt}'
+        st.session_state.conversation.append({"role": "assistant", "content": response})
+
         # Send a POST request to the server
-        response = requests.post(SERVER_URL,json=payload)
-        print("RESPONSE: ", response)
-        print("JSON: ",  response.json())
-        st.session_state.conversation.append({"role": "assistant", "content": response.json().get("response")})
+        # response = requests.post(SERVER_URL,json=payload)
+        # print("RESPONSE: ", response)
+        # print("JSON: ",  response.json())
+        # st.session_state.conversation.append({"role": "assistant", "content": response.json().get("response")})
 
 def display_chat():
     for message in st.session_state.conversation:
