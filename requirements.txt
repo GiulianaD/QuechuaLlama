@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+requests
+python-dotenv
+starlette
+SPARQLWrapper
+huggingface-hub
+streamlit
+
