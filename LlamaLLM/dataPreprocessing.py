@@ -2,6 +2,8 @@ import pandas as pd
 import re
 import os
 from num2words import num2words
+from datasets import load_dataset, Dataset
+from unsloth.chat_templates import get_chat_template
 
 # Load the data
 
@@ -19,7 +21,6 @@ basic_terms = {
 vowels = ['a', 'e', 'i', 'o', 'u']
 
 #Inspect the data
-
 print(df.head(5))
 print(df.info())
 print(df.shape)
@@ -52,8 +53,8 @@ def normalize(input):
     input = removeSpecialCharacters(input)
     input = removeExtraSpaces(input)
     return input
-# Numbers to Text
 
+# Numbers to Text
 def add_suffix(word):
     print("WORD: ", word)
 
@@ -123,3 +124,30 @@ def replace_quechua_numbers_to_text(text):
 
 def replace_spanish_numbers_to_text(text):
     return re.sub(r'\b\d+\b', lambda match: num2words(int(match.group()), lang='es'), text)
+
+for i, row in df.iterrows():
+    print(f"I: {i}, ROW: {i}", i, row)
+    df.at[i, 'spa'] = replace_spanish_numbers_to_text(row['spa'])
+    df.at[i, 'quz'] = replace_quechua_numbers_to_text(row['quz'])
+
+for col in df.columns:
+  df[col] = df[col].apply(normalize)
+
+df = pd.read_csv('/content/spa_quz_normalized_2000.csv')
+
+df.head(5)
+dataset = {"conversations":[], "labels": []}
+
+for i, row in df.iterrows():
+    spa_text = f"Please translate this text from spanish to quechua: '{row['spa']}'"
+    quz_text = f"Here is the quechua translation: '{row['quz']}'"
+    dataset["conversations"].append([{"role": "user", "content": spa_text},{"role": "assistant", "content": quz_text}])
+    dataset["labels"].append([quz_text])
+
+dataset = Dataset.from_dict(dataset)
+train_test_split = dataset.train_test_split(train_size=0.8)
+train_set = train_test_split["train"]
+test_validation_set= train_test_split["test"].train_test_split(train_size=0.5)
+test_set = test_validation_set["test"]
+validation_set = test_validation_set["train"]
+validation_set .to_csv('validation2k.csv', index=False)
