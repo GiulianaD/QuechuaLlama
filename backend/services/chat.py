@@ -1,4 +1,4 @@
-from prompts import redirection_prompt
+from prompts import redirection_prompt, quechua_translation_prompt 
 from services.llm import llama_client, llama_quechua_client
 from services.graphdb import query_knowledge_graph
 
@@ -19,9 +19,19 @@ def handle_user_query(query: str) -> dict:
         print("Warning: The LLM returned an invalid response code.")
         return generate_error_response("Invalid response from model.")
 
+#extraction of the translated text
+def extract_translation(response):
+    start_phrase = "Respond only with the Quechua translation, without any additional text."
+    if start_phrase in response:
+        translation = response.split(start_phrase)[-1].strip()
+        return translation
+    return response
+
 # Translates a Spanish query to Quechua using the LLM.
 def translate_spanish_to_quechua(query: str) -> dict:
-    translation = llama_quechua_client.get_response(query)
+    prompt = quechua_translation_prompt.format(query=query)
+    translation_response = llama_quechua_client.get_response(prompt)
+    translation = extract_translation(translation_response)
     return {"response": translation}
 
 # Generates a default response for unsupported queries.

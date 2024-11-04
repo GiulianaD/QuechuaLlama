@@ -176,3 +176,8 @@ verbalize_triplet_prompt = """
     
     ** TRIPLET **
 """
+
+quechua_translation_prompt = """
+    Please translate the following text from Spanish to Quechua: '{query}'. 
+    Respond only with the Quechua translation, without any additional text.
+"""
