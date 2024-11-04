@@ -229,7 +229,7 @@ h2.stHeading {
     color: var(--secondary-color);
     padding: var(--spacing-02);
     margin: var(--layout-02);
-    max-width: 80%; /* Asegúrate de que el texto no se desborde */
+    max-width: 80%;
     overflow-wrap: break-word;
 }
 
@@ -285,9 +285,10 @@ h2.stHeading {
     max-width: fit-content;
     margin: 10px auto;
     position: fixed;
-    bottom: 12%;
+    bottom: 13%;
     left: 58%;
     transform: translateX(-42%);
+    z-index: 1000;
 }
 
 

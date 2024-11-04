@@ -3,6 +3,8 @@ import requests
 import re
 
 SERVER_URL = "http://127.0.0.1:8000/chat"
+assistant_profile = "https://i.pinimg.com/550x/f9/e5/90/f9e590368d01c87a14938ecbb96c97ec.jpg"
+user_profile = "https://hips.hearstapps.com/hmg-prod/images/shrek-64f9ceef56099.jpg?crop=0.565xw:1.00xh;0.218xw,0&resize=1200:*"
 
 # Import CSS & HTML Files
 
@@ -118,15 +120,10 @@ def chat_input():
         if assistant_response:
             st.session_state.conversation.append({"role": "assistant", "content": assistant_response})
 
-
 def display_chat():
     for message in st.session_state.conversation:
         user_icon = user_profile if message["role"] == "user" else assistant_profile
         chat_message(message["content"], user_icon, align="right" if message["role"] == "user" else "left")
-
-
-assistant_profile = "https://i.pinimg.com/550x/f9/e5/90/f9e590368d01c87a14938ecbb96c97ec.jpg"
-user_profile = "https://hips.hearstapps.com/hmg-prod/images/shrek-64f9ceef56099.jpg?crop=0.565xw:1.00xh;0.218xw,0&resize=1200:*"
 
 def main():
     st.title("Llama Quechua")
@@ -136,11 +133,10 @@ def main():
 
     st.markdown(f'<style>{css_content}</style>', unsafe_allow_html=True)
 
-    create_sidebar()
-
     if 'conversation' not in st.session_state:
         st.session_state.conversation = []
 
+    create_sidebar()
     chat_input()
     display_chat()
 
